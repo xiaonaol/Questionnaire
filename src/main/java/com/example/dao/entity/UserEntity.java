@@ -1,19 +1,20 @@
 package com.example.dao.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class UserEntity implements Serializable {
     private String id;
     private String username;
     private String password;
-    private Date startTime;
-    private Date stopTime;
+    private Timestamp startTime;
+    private Timestamp stopTime;
     private String status;
     private String createdBy;
-    private Date creationDate;
-    private String lastUpdateBy;
-    private Date lastUpdateDate;
+    private Timestamp creationDate;
+    private String lastUpdatedBy;
+    private Timestamp lastUpdateDate;
 
     public String getId() {
         return id;
@@ -43,7 +44,7 @@ public class UserEntity implements Serializable {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
 
@@ -51,7 +52,7 @@ public class UserEntity implements Serializable {
         return stopTime;
     }
 
-    public void setStopTime(Date stopTime) {
+    public void setStopTime(Timestamp stopTime) {
         this.stopTime = stopTime;
     }
 
@@ -75,23 +76,39 @@ public class UserEntity implements Serializable {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
     }
 
-    public String getLastUpdateBy() {
-        return lastUpdateBy;
+    public String getLastUpdatedBy() {
+        return lastUpdatedBy;
     }
 
-    public void setLastUpdateBy(String lastUpdateBy) {
-        this.lastUpdateBy = lastUpdateBy;
+    public void setLastUpdatedBy(String lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
     }
 
     public Date getLastUpdateDate() {
         return lastUpdateDate;
     }
 
-    public void setLastUpdateDate(Date lastUpdateDate) {
+    public void setLastUpdateDate(Timestamp lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", startTime=" + startTime +
+                ", stopTime=" + stopTime +
+                ", status='" + status + '\'' +
+                ", createdBy='" + createdBy + '\'' +
+                ", creationDate=" + creationDate +
+                ", lastUpdateBy='" + lastUpdatedBy + '\'' +
+                ", lastUpdateDate=" + lastUpdateDate +
+                '}';
     }
 }
