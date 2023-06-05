@@ -158,7 +158,6 @@
 
       start_time = #{startTime,jdbcType=TIMESTAMP},
       stop_time = #{stopTime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=VARCHAR},
       created_by = #{createdBy,jdbcType=CHAR},
       creation_date = #{creationDate,jdbcType=TIMESTAMP},
       last_updated_by = #{lastUpdatedBy,jdbcType=CHAR},

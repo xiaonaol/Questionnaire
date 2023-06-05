@@ -57,7 +57,7 @@ const handleCreateUser = () => {
   if(user.id) {
 
     $.ajax({
-      url: API_BASE_URL + '/admin/modifyUser',
+      url: API_BASE_URL + '/admin/modifyUserInfo',
       type: 'POST',
       data: JSON.stringify(user),
       dataType: 'json',
