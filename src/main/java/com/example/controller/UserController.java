@@ -129,5 +129,24 @@ public class UserController {
         return httpResponseEntity;
     }
 
-
+    @RequestMapping(value = "/closeUserinfo", method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity closeUser(@RequestBody UserEntity userEntity) {
+        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        try {
+            int result = userService.closeUserById(userEntity);
+            if (result != 0) {
+                httpResponseEntity.setCode("666");
+                httpResponseEntity.setData(result);
+                httpResponseEntity.setMessage("关闭成功");
+            } else {
+                httpResponseEntity.setCode("0");
+                httpResponseEntity.setData(0);
+                httpResponseEntity.setMessage("关闭失败");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return httpResponseEntity;
+    }
 }

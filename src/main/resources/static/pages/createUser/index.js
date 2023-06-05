@@ -5,7 +5,7 @@ onload = () => {
   $('#startTime').datetimepicker({
     language: 'zh-CN', // 显示中文
     format: 'yyyy-mm-dd hh:mm:ss', // 显示格式
-    // minView: "month", // 设置只显示到月份
+    //minView: "month", // 设置只显示到月份
     minView: 0,  //0表示可以选择小时、分钟   1只可以选择小时
     minuteStep: 1,//分钟间隔1分钟
     initialDate: new Date(), // 初始化当前日期

@@ -14,4 +14,6 @@ public interface UserEntityMapper {
     int deleteUserById(UserEntity userEntity);
     int updateByPrimarySelective(UserEntity userEntity);
     List<UserEntity> selectUserInfo(UserEntity userEntity);
+
+    int closeUserById(UserEntity userEntity);
 }

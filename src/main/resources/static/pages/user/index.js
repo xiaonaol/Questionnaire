@@ -33,8 +33,8 @@ const fetchUserList = () => {
             <td>
               <button type="button" class="btn btn-link">重置密码</button>
               <button type="button" class="btn btn-link" onclick="handleEdit('${item.id}')">编辑</button>
-              <button type="button" class="btn btn-link btn-red">关闭</button>
-              <button type="button" class="btn btn-link btn-red" onclick="deleteUser('${item.id}')">删除</button>
+              <button type="button" class="btn btn-link btn-red" onclick="closeUser('${item.id}')">关闭</button>
+              <button type="button" class="btn btn-link btn-red" onclick="deleteUser('${item.username}')">删除</button>
             </td>
           </tr>
         `)
@@ -42,9 +42,9 @@ const fetchUserList = () => {
     }
   })
 }
-const deleteUser = (id) => {
+const deleteUser = (username) => {
   let params = {
-    id: id
+    username: username
   }
   $.ajax({
     url: API_BASE_URL + '/admin/deleteUserinfo',
@@ -79,4 +79,19 @@ const handleEdit = (id) => {
   let user = userList.filter(item => item.id === id)[0]
   $util.setPageParam('user', user)
   location.href = '/pages/createUser/index.html'
+}
+const closeUser = (id) => {
+  let params = {
+    id: id
+  }
+  $.ajax({
+    url: API_BASE_URL + '/admin/closeUserinfo',
+    type: 'POST',
+    data: JSON.stringify(params),
+    dataType: 'json',
+    contentType: 'application/json',
+    success(res) {
+      fetchUserList()
+    }
+  })
 }

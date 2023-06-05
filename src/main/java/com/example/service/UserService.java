@@ -25,6 +25,7 @@ public class UserService {
 
     public int addUserInfo(UserEntity userEntity) {
         userEntity.setId(UUIDUtil.getOneUUID());
+        userEntity.setStatus("1");
         System.out.println(userEntity.toString());
         int userResult = userEntityMapper.insert(userEntity);
         if(userResult != 0){
@@ -41,6 +42,12 @@ public class UserService {
 
     public int deleteUserById(UserEntity userEntity) {
         int userResult = userEntityMapper.deleteUserById(userEntity);
+        return userResult;
+    }
+
+    public int closeUserById(UserEntity userEntity) {
+        int userResult = userEntityMapper.closeUserById(userEntity);
+        System.out.println(userEntity.toString());
         return userResult;
     }
 }
