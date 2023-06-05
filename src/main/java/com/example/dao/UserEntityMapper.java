@@ -16,4 +16,6 @@ public interface UserEntityMapper {
     List<UserEntity> selectUserInfo(UserEntity userEntity);
 
     int closeUserById(UserEntity userEntity);
+
+    int updateByPrimaryKey(UserEntity userEntity);
 }

@@ -68,6 +68,7 @@ public class UserController {
 
     @RequestMapping(value = "/modifyUser", method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity modifyUser(@RequestBody UserEntity userEntity) {
+        System.out.println(userEntity.toString());
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         try {
             int result = userService.modifyUserInfo(userEntity);
