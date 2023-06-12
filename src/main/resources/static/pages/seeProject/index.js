@@ -11,7 +11,7 @@ const fetchProjectInfo = (id) => {
     id
   }
   $.ajax({
-    url: API_BASE_URL + '/queryProjectList',
+    url: API_BASE_URL + '/admin/queryProjectList',
     type: "POST",
     data: JSON.stringify(params),
     dataType: "json",

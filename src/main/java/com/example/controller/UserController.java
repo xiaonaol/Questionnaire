@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.http.HttpResponse;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -48,7 +48,6 @@ public class UserController {
     public HttpResponseEntity addUser(@RequestBody UserEntity userEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         try {
-
             int result = userService.addUserInfo(userEntity);
             if(result != 0) {
                 httpResponseEntity.setCode("666");
@@ -112,6 +111,7 @@ public class UserController {
     @RequestMapping(value = "/queryUserList", method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity queryUserList(@RequestBody UserEntity userEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+        System.out.println(userEntity.toString());
         try {
             List<UserEntity> hasUser = userService.queryUserList(userEntity);
             if(CollectionUtils.isEmpty(hasUser)) {
