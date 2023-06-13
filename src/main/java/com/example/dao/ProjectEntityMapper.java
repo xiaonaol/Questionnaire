@@ -15,4 +15,8 @@ public interface ProjectEntityMapper {
     ProjectEntity queryProjectEntity(ProjectEntity projectEntity);
 
     int insertSelective(ProjectEntity record);
+
+    int deleteProjectById(ProjectEntity projectEntity);
+
+    int updateByPrimaryKeySelective(ProjectEntity projectEntity);
 }

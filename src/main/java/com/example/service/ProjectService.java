@@ -40,4 +40,14 @@ public class ProjectService {
             return true;
         }
     }
+
+    public int deleteProjectById(ProjectEntity projectEntity) {
+        int result = projectEntityMapper.deleteProjectById(projectEntity);
+        return result;
+    }
+
+    public int modifyProjectInfo(ProjectEntity projectEntity) {
+        int result = projectEntityMapper.updateByPrimaryKeySelective(projectEntity);
+        return result;
+    }
 }

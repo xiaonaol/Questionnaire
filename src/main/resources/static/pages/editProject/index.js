@@ -19,7 +19,7 @@ const handleSaveChange = () => {
   if (!params.projectName) return alert('项目名称不能为空！')
   if (!params.projectContent) return alert('项目描述不能为空！')
   $.ajax({
-    url: API_BASE_URL + '/modifyProjectInfo',
+    url: API_BASE_URL + '/admin/modifyProjectInfo',
     type: "POST",
     data: JSON.stringify(params),
     dataType: "json",
