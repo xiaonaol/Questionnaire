@@ -2,10 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.ProjectEntityMapper">
     <select id="queryProjectList" parameterType="java.lang.String" resultType="com.example.dao.entity.ProjectEntity">
-        SELECT id, user_id as userId, project_name as projectName, project_content as projectContent,
-               created_by as createdBy, creation_date as creationDate, last_updated_by as lastUpdateBy,
-               last_update_date as lastUpdateDate
-        FROM project_info;
+        SELECT id,user_id AS userId,project_name AS projectName,project_content AS projectContent,created_by AS createdBy,creation_date AS creationDate,last_updated_by AS lastUpdatedBy,last_update_date AS lastUpdateDate
+        FROM project_info
+        <where>
+            <if test = "projectName != null and projectName != '' ">
+                project_name LIKE CONCAT('%',#{projectName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test = "id !=null and id !=''">
+                AND id = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test = "createdBy !=null and createdBy !=''">
+                AND created_by = #{createdBy,jdbcType=CHAR}
+            </if>
+        </where>
     </select>
     <insert id="insert" parameterType="com.example.dao.entity.ProjectEntity">
         <!--
@@ -17,5 +26,65 @@
         values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR},
         #{projectContent,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR},
         #{creationDate,jdbcType=DATE}, #{lastUpdatedBy,jdbcType=DATE}, #{lastUpdateDate})
+    </insert>
+    <select id="queryProjectEntity" parameterType="com.example.dao.entity.ProjectEntity" resultType="com.example.dao.entity.ProjectEntity">
+        SELECT id,user_id AS userId,project_name AS projectName,project_content AS projectContent,created_by AS createdBy,creation_date AS creationDate,last_updated_by AS lastUpdatedBy,last_update_date AS lastUpdateDate
+        FROM project_info
+        WHERE  project_name = #{projectName,jdbcType=VARCHAR}
+    </select>
+    <insert id="insertSelective" parameterType="com.example.dao.entity.ProjectEntity">
+        insert into project_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="projectName != null">
+                project_name,
+            </if>
+            <if test="projectContent != null">
+                project_content,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="creationDate != null">
+                creation_date,
+            </if>
+            <if test="lastUpdatedBy != null">
+                last_updated_by,
+            </if>
+            <if test="lastUpdateDate != null">
+                last_update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="projectName != null">
+                #{projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectContent != null">
+                #{projectContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=CHAR},
+            </if>
+            <if test="creationDate != null">
+                #{creationDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdatedBy != null">
+                #{lastUpdatedBy,jdbcType=CHAR},
+            </if>
+            <if test="lastUpdateDate != null">
+                #{lastUpdateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
     </insert>
 </mapper>

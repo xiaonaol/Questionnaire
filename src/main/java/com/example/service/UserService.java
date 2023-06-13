@@ -48,5 +48,9 @@ public class UserService {
         int userResult = userEntityMapper.closeUserById(userEntity);
         return userResult;
     }
+
+    public UserEntity queryByUserName(String userName) {
+        return userEntityMapper.selectAllByName(userName);
+    }
 }
 

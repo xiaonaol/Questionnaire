@@ -179,4 +179,8 @@
     set status = 0
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="selectAllByName" parameterType="java.lang.String" resultType="com.example.dao.entity.UserEntity">
+    SELECT id,username,password,start_time AS startTime,stop_time AS endTime,creation_date FROM user_info
+    WHERE username = #{userName,jdbcType=VARCHAR}
+  </select>
 </mapper>

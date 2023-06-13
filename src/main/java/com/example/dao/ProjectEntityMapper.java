@@ -12,4 +12,7 @@ public interface ProjectEntityMapper {
     List<ProjectEntity> queryProjectList(ProjectEntity projectEntity);
 
     int insert(ProjectEntity projectEntity);
+    ProjectEntity queryProjectEntity(ProjectEntity projectEntity);
+
+    int insertSelective(ProjectEntity record);
 }

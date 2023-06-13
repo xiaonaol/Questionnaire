@@ -11,6 +11,7 @@ const fetchProjectList = () => {
     createdBy: $util.getItem('userInfo')[0].username,
     projectName: $('#projectName').val()
   }
+  console.log(params.projectName)
   $.ajax({
     url: API_BASE_URL + '/admin/queryProjectList',
     type: "POST",

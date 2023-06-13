@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.common.utils.DateUtil;
 import com.example.common.utils.UUIDUtil;
 import com.example.dao.ProjectEntityMapper;
 import com.example.dao.entity.ProjectEntity;
@@ -7,6 +8,7 @@ import com.example.dao.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -15,17 +17,27 @@ public class ProjectService {
     private ProjectEntityMapper projectEntityMapper;
     public List<ProjectEntity> queryProjectList(ProjectEntity projectEntity) {
         List<ProjectEntity> result = projectEntityMapper.queryProjectList(projectEntity);
-        System.out.println(result);
         return result;
     }
 
-    public int addProjectInfo(ProjectEntity projectEntity) {
-        projectEntity.setId(UUIDUtil.getOneUUID());
-        int projectResult = projectEntityMapper.insert(projectEntity);
-        if(projectResult != 0){
-            return 3;
-        }else{
-            return projectResult;
+    public int addProjectInfo(ProjectEntity projectEntity, String user) {
+        String id = UUIDUtil.getOneUUID();
+        projectEntity.setId(id);
+        projectEntity.setUserId(user);
+        Date date = DateUtil.getCreateTime();
+        projectEntity.setCreationDate(date);
+        projectEntity.setLastUpdateDate(date);
+        projectEntityMapper.insertSelective(projectEntity);
+        return 0;
+    }
+
+    public boolean queryProjectEntityIsExit(ProjectEntity projectEntity) {
+        ProjectEntity projectEntity2 = projectEntityMapper.queryProjectEntity(projectEntity);
+        if(projectEntity2==null) {
+            return false;
+        }
+        else {
+            return true;
         }
     }
 }

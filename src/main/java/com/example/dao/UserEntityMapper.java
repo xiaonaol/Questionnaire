@@ -18,4 +18,5 @@ public interface UserEntityMapper {
     int closeUserById(UserEntity userEntity);
 
     int updateByPrimaryKey(UserEntity userEntity);
+    UserEntity selectAllByName(String username);
 }
