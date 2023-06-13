@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
@@ -19,24 +20,13 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @RequestMapping(value = "/queryProjectList", method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity queryProjectList(@RequestBody ProjectEntity projectEntity) {
+    @RequestMapping(value = "/queryProjectList",method = RequestMethod.POST, headers = "Accept=application/json")
+    public HttpResponseEntity queryProjectList(@RequestBody(required = false) ProjectEntity projectEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-        try {
-            List<ProjectEntity> hasProject = projectService.queryProjectList(projectEntity);
-            if(CollectionUtils.isEmpty(hasProject)) {
-                httpResponseEntity.setCode("0");
-                httpResponseEntity.setData(hasProject.get(0));
-                httpResponseEntity.setMessage("无项目信息");
-            }else{
-                httpResponseEntity.setCode("666");
-                httpResponseEntity.setData(hasProject);
-                httpResponseEntity.setMessage("查询成功");
-            }
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
+        httpResponseEntity.setCode("666");
+        List<ProjectEntity> resultList = projectService.queryProjectList(projectEntity);
+        httpResponseEntity.setData(resultList);
+        httpResponseEntity.setMessage("查询成功");
         return httpResponseEntity;
     }
 

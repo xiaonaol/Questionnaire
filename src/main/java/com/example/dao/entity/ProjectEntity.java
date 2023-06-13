@@ -10,7 +10,7 @@ public class ProjectEntity {
     private String projectContent;
     private String createdBy;
     private Date creationDate;
-    private String lastUpdateBy;
+    private String lastUpdatedBy;
     private Date lastUpdateDate;
 
     public String getId() {
@@ -61,12 +61,12 @@ public class ProjectEntity {
         this.creationDate = creationDate;
     }
 
-    public String getLastUpdateBy() {
-        return lastUpdateBy;
+    public String getLastUpdatedBy() {
+        return lastUpdatedBy;
     }
 
-    public void setLastUpdateBy(String lastUpdateBy) {
-        this.lastUpdateBy = lastUpdateBy;
+    public void setLastUpdatedBy(String lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
     }
 
     public Date getLastUpdateDate() {
@@ -86,7 +86,7 @@ public class ProjectEntity {
                 ", projectContent='" + projectContent + '\'' +
                 ", createdBy='" + createdBy + '\'' +
                 ", creationDate=" + creationDate +
-                ", lastUpdateBy='" + lastUpdateBy + '\'' +
+                ", lastUpdateBy='" + lastUpdatedBy + '\'' +
                 ", lastUpdateDate=" + lastUpdateDate +
                 '}';
     }

@@ -16,6 +16,6 @@
         project_content, created_by, creation_date, last_updated_by, last_update_date)
         values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR},
         #{projectContent,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR},
-        #{creationDate,jdbcType=DATE}, #{lastUpdateBy,jdbcType=DATE}, #{lastUpdateDate})
+        #{creationDate,jdbcType=DATE}, #{lastUpdatedBy,jdbcType=DATE}, #{lastUpdateDate})
     </insert>
 </mapper>

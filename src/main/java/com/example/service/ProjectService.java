@@ -15,6 +15,7 @@ public class ProjectService {
     private ProjectEntityMapper projectEntityMapper;
     public List<ProjectEntity> queryProjectList(ProjectEntity projectEntity) {
         List<ProjectEntity> result = projectEntityMapper.queryProjectList(projectEntity);
+        System.out.println(result);
         return result;
     }
 
