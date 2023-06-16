@@ -91,7 +91,8 @@ public class UserController {
     public HttpResponseEntity deleteUser(@RequestBody UserEntity userEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         try {
-            int result = userService.deleteUserById(userEntity);
+            System.out.println(userEntity);
+            int result = userService.deleteUserByName(userEntity);
             if(result != 0) {
                 httpResponseEntity.setCode("10");
                 httpResponseEntity.setData(result);

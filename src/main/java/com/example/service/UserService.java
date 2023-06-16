@@ -39,8 +39,8 @@ public class UserService {
         return  userResult;
     }
 
-    public int deleteUserById(UserEntity userEntity) {
-        int userResult = userEntityMapper.deleteUserById(userEntity);
+    public int deleteUserByName(UserEntity userEntity) {
+        int userResult = userEntityMapper.deleteUserByName(userEntity);
         return userResult;
     }
 

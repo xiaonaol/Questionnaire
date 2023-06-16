@@ -85,7 +85,7 @@ public class ProjectController {
                 httpResponseEntity.setData(result);
                 httpResponseEntity.setMessage("修改成功");
             }else{
-                httpResponseEntity.setCode("0");
+                httpResponseEntity.setCode("10");
                 httpResponseEntity.setData(0);
                 httpResponseEntity.setMessage("修改失败");
             }
