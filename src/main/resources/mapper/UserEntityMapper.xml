@@ -32,9 +32,9 @@
       status, created_by, creation_date, 
       last_updated_by, last_update_date)
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-       #{startTime,jdbcType=TIMESTAMP}, #{stopTime,jdbcType=TIMESTAMP},
-      #{status,jdbcType=VARCHAR}, #{createdBy,jdbcType=CHAR}, #{creationDate,jdbcType=TIMESTAMP}, 
-      #{lastUpdatedBy,jdbcType=CHAR}, #{lastUpdateDate,jdbcType=TIMESTAMP})
+       #{startTime,jdbcType=DATE}, #{stopTime,jdbcType=DATE},
+      #{status,jdbcType=VARCHAR}, #{createdBy,jdbcType=CHAR}, #{creationDate,jdbcType=DATE},
+      #{lastUpdatedBy,jdbcType=CHAR}, #{lastUpdateDate,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.example.dao.entity.UserEntity">
     <!--
@@ -87,10 +87,10 @@
       </if>
 
       <if test="startTime != null">
-        #{startTime,jdbcType=TIMESTAMP},
+        #{startTime,jdbcType=DATE},
       </if>
       <if test="stopTime != null">
-        #{stopTime,jdbcType=TIMESTAMP},
+        #{stopTime,jdbcType=DATE},
       </if>
       <if test="status == null">
         1,
@@ -99,13 +99,13 @@
         #{createdBy,jdbcType=CHAR},
       </if>
       <if test="creationDate != null">
-        #{creationDate,jdbcType=TIMESTAMP},
+        #{creationDate,jdbcType=DATE},
       </if>
       <if test="lastUpdatedBy != null">
         #{lastUpdatedBy,jdbcType=CHAR},
       </if>
       <if test="lastUpdateDate != null">
-        #{lastUpdateDate,jdbcType=TIMESTAMP},
+        #{lastUpdateDate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -124,10 +124,10 @@
       </if>
 
       <if test="startTime != null">
-        start_time = #{startTime,jdbcType=TIMESTAMP},
+        start_time = #{startTime,jdbcType=DATE},
       </if>
       <if test="stopTime != null">
-        stop_time = #{stopTime,jdbcType=TIMESTAMP},
+        stop_time = #{stopTime,jdbcType=DATE},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
@@ -136,13 +136,13 @@
         created_by = #{createdBy,jdbcType=CHAR},
       </if>
       <if test="creationDate != null">
-        creation_date = #{creationDate,jdbcType=TIMESTAMP},
+        creation_date = #{creationDate,jdbcType=DATE},
       </if>
       <if test="lastUpdatedBy != null">
         last_updated_by = #{lastUpdatedBy,jdbcType=CHAR},
       </if>
       <if test="lastUpdateDate != null">
-        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+        last_update_date = #{lastUpdateDate,jdbcType=DATE},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -156,12 +156,12 @@
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
 
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      stop_time = #{stopTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=DATE},
+      stop_time = #{stopTime,jdbcType=DATE},
       created_by = #{createdBy,jdbcType=CHAR},
-      creation_date = #{creationDate,jdbcType=TIMESTAMP},
+      creation_date = #{creationDate,jdbcType=DATE},
       last_updated_by = #{lastUpdatedBy,jdbcType=CHAR},
-      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP}
+      last_update_date = #{lastUpdateDate,jdbcType=DATE}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectUserInfo" parameterType="java.lang.String" resultType="com.example.dao.entity.UserEntity">

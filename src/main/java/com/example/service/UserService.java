@@ -6,6 +6,8 @@ import com.example.dao.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -23,8 +25,11 @@ public class UserService {
         return result;
     }
 
-    public int addUserInfo(UserEntity userEntity) {
+    public int addUserInfo(UserEntity userEntity) throws ParseException {
         userEntity.setId(UUIDUtil.getOneUUID());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentTime = sdf.format(new java.util.Date());
+        userEntity.setCreationDate(new java.sql.Date(sdf.parse(currentTime).getTime()));
         userEntity.setStatus("1");
         int userResult = userEntityMapper.insert(userEntity);
         if(userResult != 0){
@@ -34,9 +39,11 @@ public class UserService {
         }
     }
 
-    public int modifyUserInfo(UserEntity userEntity) {
-        int userResult = userEntityMapper.updateByPrimaryKey(userEntity);
-        return  userResult;
+    public int modifyUserInfo(UserEntity userEntity) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentTime = sdf.format(new java.util.Date());
+        userEntity.setCreationDate(new java.sql.Date(sdf.parse(currentTime).getTime()));
+        return userEntityMapper.updateByPrimaryKey(userEntity);
     }
 
     public int deleteUserByName(UserEntity userEntity) {

@@ -1,7 +1,7 @@
 package com.example.dao.entity;
 
 
-import java.util.Date;
+import java.sql.Date;
 
 public class ProjectEntity {
     private String id;

@@ -30,7 +30,6 @@ public class UserController {
             List<UserEntity> hasUser = userService.selectUserInfo(userEntity);
             if(CollectionUtils.isEmpty(hasUser)) {
                 httpResponseEntity.setCode("0");
-                httpResponseEntity.setData(hasUser.get(0));
                 httpResponseEntity.setMessage("用户名或者密码错误");
             }else{
                 httpResponseEntity.setCode("666");
@@ -67,7 +66,6 @@ public class UserController {
 
     @RequestMapping(value = "/modifyUserInfo", method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity modifyUser(@RequestBody UserEntity userEntity) {
-        System.out.println(userEntity.toString());
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         try {
             int result = userService.modifyUserInfo(userEntity);
@@ -91,7 +89,6 @@ public class UserController {
     public HttpResponseEntity deleteUser(@RequestBody UserEntity userEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         try {
-            System.out.println(userEntity);
             int result = userService.deleteUserByName(userEntity);
             if(result != 0) {
                 httpResponseEntity.setCode("10");
@@ -112,7 +109,6 @@ public class UserController {
     @RequestMapping(value = "/queryUserList", method = RequestMethod.POST, headers = "Accept=application/json")
     public HttpResponseEntity queryUserList(@RequestBody UserEntity userEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-        System.out.println(userEntity.toString());
         try {
             List<UserEntity> hasUser = userService.queryUserList(userEntity);
             if(CollectionUtils.isEmpty(hasUser)) {
@@ -131,24 +127,4 @@ public class UserController {
         return httpResponseEntity;
     }
 
-    @RequestMapping(value = "/closeUserinfo", method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity closeUser(@RequestBody UserEntity userEntity) {
-        HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
-        try {
-            int result = userService.closeUserById(userEntity);
-            if (result != 0) {
-                httpResponseEntity.setCode("666");
-                httpResponseEntity.setData(result);
-                httpResponseEntity.setMessage("关闭成功");
-            } else {
-                httpResponseEntity.setCode("0");
-                httpResponseEntity.setData(0);
-                httpResponseEntity.setMessage("关闭失败");
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-        return httpResponseEntity;
-    }
 }

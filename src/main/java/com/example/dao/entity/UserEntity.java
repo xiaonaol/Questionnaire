@@ -1,20 +1,20 @@
 package com.example.dao.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class UserEntity implements Serializable {
     private String id;
     private String username;
     private String password;
-    private Timestamp startTime;
-    private Timestamp stopTime;
+    private Date startTime;
+    private Date stopTime;
     private String status;
     private String createdBy;
-    private Timestamp creationDate;
+    private Date creationDate;
     private String lastUpdatedBy;
-    private Timestamp lastUpdateDate;
+    private Date lastUpdateDate;
 
     public String getId() {
         return id;
@@ -44,7 +44,7 @@ public class UserEntity implements Serializable {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
@@ -52,7 +52,7 @@ public class UserEntity implements Serializable {
         return stopTime;
     }
 
-    public void setStopTime(Timestamp stopTime) {
+    public void setStopTime(Date stopTime) {
         this.stopTime = stopTime;
     }
 
@@ -76,7 +76,7 @@ public class UserEntity implements Serializable {
         return creationDate;
     }
 
-    public void setCreationDate(Timestamp creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -92,7 +92,7 @@ public class UserEntity implements Serializable {
         return lastUpdateDate;
     }
 
-    public void setLastUpdateDate(Timestamp lastUpdateDate) {
+    public void setLastUpdateDate(Date lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
     }
 

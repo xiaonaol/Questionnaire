@@ -1,14 +1,13 @@
 package com.example.service;
 
-import com.example.common.utils.DateUtil;
 import com.example.common.utils.UUIDUtil;
 import com.example.dao.ProjectEntityMapper;
 import com.example.dao.entity.ProjectEntity;
-import com.example.dao.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -20,13 +19,18 @@ public class ProjectService {
         return result;
     }
 
-    public int addProjectInfo(ProjectEntity projectEntity, String user) {
+    public int addProjectInfo(ProjectEntity projectEntity, String user) throws ParseException {
         String id = UUIDUtil.getOneUUID();
-        projectEntity.setId(id);
+        if(projectEntity.getId() == null) {
+            projectEntity.setId(id);
+        }
         projectEntity.setUserId(user);
-        Date date = DateUtil.getCreateTime();
-        projectEntity.setCreationDate(date);
-        projectEntity.setLastUpdateDate(date);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentTime = sdf.format(new java.util.Date());
+
+        projectEntity.setCreationDate(new java.sql.Date(sdf.parse(currentTime).getTime()));
+        projectEntity.setLastUpdateDate(new java.sql.Date(sdf.parse(currentTime).getTime()));
         projectEntityMapper.insertSelective(projectEntity);
         return 0;
     }

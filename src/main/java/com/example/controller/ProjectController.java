@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/addProjectInfo",method = RequestMethod.POST, headers = "Accept=application/json")
-    public HttpResponseEntity addProjectInfo(@RequestBody ProjectEntity projectEntity) {
+    public HttpResponseEntity addProjectInfo(@RequestBody ProjectEntity projectEntity) throws ParseException {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         boolean flag = projectService.queryProjectEntityIsExit(projectEntity);
         if(flag) {
