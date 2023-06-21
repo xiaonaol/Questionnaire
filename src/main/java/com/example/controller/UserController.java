@@ -113,7 +113,6 @@ public class UserController {
             List<UserEntity> hasUser = userService.queryUserList(userEntity);
             if(CollectionUtils.isEmpty(hasUser)) {
                 httpResponseEntity.setCode("0");
-                httpResponseEntity.setData(hasUser.get(0));
                 httpResponseEntity.setMessage("无用户信息");
             }else{
                 httpResponseEntity.setCode("666");

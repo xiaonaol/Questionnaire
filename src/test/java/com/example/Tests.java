@@ -41,11 +41,21 @@ class Project1ApplicationTests {
 
     Logger log = LogManager.getLogger(Project1ApplicationTests.class);
 
-    //新增用户
+    //新增用户成功
     @Test
-    public void insertUser() throws Exception {
+    public void insertUser1() throws Exception {
         UserEntity userEntity = new UserEntity();
         userEntity.setId("6");
+        userEntity.setUsername("LS");
+        userEntity.setPassword("123");
+        userController.addUser(userEntity);
+    }
+
+    //新增用户失败
+    @Test
+    public void insertUser2() throws Exception {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId("7fbae33b76a048c3b40bf963a06b254e");
         userEntity.setUsername("LS");
         userEntity.setPassword("123");
         userController.addUser(userEntity);

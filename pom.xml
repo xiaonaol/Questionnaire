@@ -87,12 +87,6 @@
             <goals>
               <goal>report</goal>
             </goals>
-            <configuration>
-              <includes>
-                <include>com/example/controller/*</include>
-                <include>com/example/service/*</include>
-              </includes>
-            </configuration>
           </execution>
         </executions>
       </plugin>

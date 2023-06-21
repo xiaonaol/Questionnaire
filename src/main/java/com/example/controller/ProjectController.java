@@ -69,9 +69,8 @@ public class ProjectController {
                 httpResponseEntity.setData(0);
                 httpResponseEntity.setMessage("删除失败");
             }
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return httpResponseEntity;
     }
