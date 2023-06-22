@@ -13,7 +13,7 @@ public class QuestionnaireEntity {
     private String questionnaireType;
     private int questionCount;
     private String status;
-    private String projectName;
+    private String projectId;
 
     @Override
     public String toString() {
@@ -28,7 +28,7 @@ public class QuestionnaireEntity {
                 ", questionnaireType='" + questionnaireType + '\'' +
                 ", questionCount=" + questionCount +
                 ", status='" + status + '\'' +
-                ", projectName='" + projectName + '\'' +
+                ", projectId='" + projectId + '\'' +
                 '}';
     }
 
@@ -112,12 +112,12 @@ public class QuestionnaireEntity {
         this.status = status;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public String getProjectId() {
+        return projectId;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 }
 

@@ -14,7 +14,7 @@ public class QuestionnaireService {
     private QuestionnaireEntityMapper questionnaireEntityMapper;
 
     public Map<QuestionnaireEntity, ProjectEntity> queryQuestionnaireList(QuestionnaireEntity questionnaireEntity, ProjectEntity projectEntity){
-        Map<QuestionnaireEntity,ProjectEntity> result = questionnaireEntityMapper.queryQuestionnaireList(questionnaireEntity,projectEntity);
+        Map<QuestionnaireEntity, ProjectEntity> result = questionnaireEntityMapper.queryQuestionnaireList(questionnaireEntity, projectEntity);
         return result;
     }
 
@@ -23,16 +23,16 @@ public class QuestionnaireService {
         int questionnaireResult = questionnaireEntityMapper.insert(questionnaireEntity);
         if (questionnaireResult!=0){
             return 3;
-        }else return questionnaireResult;
+        } else {
+            return questionnaireResult;
+        }
     }
 
     public int updateByPrimaryKeySelective(QuestionnaireEntity questionnaireEntity){
-        int questionnaireResult = questionnaireEntityMapper.updateByPrimaryKeySelective(questionnaireEntity);
-        return questionnaireResult;
+        return questionnaireEntityMapper.updateByPrimaryKeySelective(questionnaireEntity);
     }
 
     public int deleteQuestionnaireById(QuestionnaireEntity questionnaireEntity){
-        int questionnaireResult = questionnaireEntityMapper.deleteQuestionnaireById(questionnaireEntity);
-        return questionnaireResult;
+        return questionnaireEntityMapper.deleteQuestionnaireById(questionnaireEntity);
     }
 }

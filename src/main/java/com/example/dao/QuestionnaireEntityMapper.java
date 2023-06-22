@@ -1,7 +1,6 @@
 package com.example.dao;
 
 import com.example.dao.entity.ProjectEntity;
-import com.example.dao.entity.QuestionEntity;
 import com.example.dao.entity.QuestionnaireEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
