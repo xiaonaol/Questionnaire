@@ -1,9 +1,33 @@
 onload = () => {
-  $('#headerUsername').text($util.getItem('userInfo').username)
+  $('#headerUsername').text($util.getItem('userInfo')[0].username)
   $('#headerDivB').text('创建问卷')
+  fetchProjectList()
+}
+
+const fetchProjectList=()=>{
+  let params={
+    createdBy: $util.getItem('userInfo')[0].username
+  }
+  $.ajax({
+    url: API_BASE_URL + '/queryProjectList',
+    type: "POST",
+    data:JSON.stringify(params),
+    dataType: "json",
+    contentType: "application/json",
+    success(res) {
+      res.data.map(item => {
+        $('#selectProject').append(`<option value= ${item.id}> ${item.projectName} </option>`)
+      })
+    }
+  })
 }
 
 const onCreateTemplate = () => {
+  let param = {
+    projectName: $('#selectProject option:selected').text(),
+    questionnaireLeo: $('#selectLeo option:selected').text()
+  }
+  $util.setPageParam('questionnaireInfo',param)
   location.href = "/pages/createNewQuestionnaire/index.html"
 }
 
@@ -65,3 +89,4 @@ const createTemplate = () => {
 const handleEdit = () => {
   open('/pages/designQuestionnaire/index.html')
 }
+
