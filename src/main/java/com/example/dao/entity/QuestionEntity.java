@@ -3,20 +3,20 @@ package com.example.dao.entity;
 public class QuestionEntity {
     private String id;
     private String questionnaireId;
-    private String type;
+    private String questionType;
     private String questionTitle;
-    private String questionNum;
-    private String questionOrder;
+    private Integer questionNum;
+    private String mustAnswer;
 
     @Override
     public String toString() {
         return "QuestionEntity{" +
                 "id='" + id + '\'' +
                 ", questionnaireId='" + questionnaireId + '\'' +
-                ", type='" + type + '\'' +
+                ", type='" + questionType + '\'' +
                 ", questionTitle='" + questionTitle + '\'' +
                 ", questionNum='" + questionNum + '\'' +
-                ", questionOrder='" + questionOrder + '\'' +
+                ", mustAnswer='" + mustAnswer + '\'' +
                 '}';
     }
 
@@ -36,12 +36,12 @@ public class QuestionEntity {
         this.questionnaireId = questionnaireId;
     }
 
-    public String getType() {
-        return type;
+    public String getQuestionType() {
+        return questionType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
     }
 
     public String getQuestionTitle() {
@@ -52,20 +52,19 @@ public class QuestionEntity {
         this.questionTitle = questionTitle;
     }
 
-    public String getQuestionNum() {
+    public Integer getQuestionNum() {
         return questionNum;
     }
 
-    public void setQuestionNum(String questionNum) {
+    public void setQuestionNum(Integer questionNum) {
         this.questionNum = questionNum;
     }
 
-    public String getQuestionOrder() {
-        return questionOrder;
+    public String getMustAnswer() {
+        return mustAnswer;
     }
 
-    public void setQuestionOrder(String questionOrder) {
-        this.questionOrder = questionOrder;
+    public void setMustAnswer(String mustAnswer) {
+        this.mustAnswer = mustAnswer;
     }
 }
-

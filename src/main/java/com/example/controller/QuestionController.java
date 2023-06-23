@@ -1,9 +1,8 @@
 package com.example.controller;
 
 import com.example.beans.HttpResponseEntity;
-import com.example.dao.entity.ProjectEntity;
-import com.example.dao.entity.QuestionnaireEntity;
-import com.example.service.QuestionnaireService;
+import com.example.dao.entity.QuestionEntity;
+import com.example.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,48 +10,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-public class QuestionnaireController {
+public class QuestionController {
     @Autowired
-    private QuestionnaireService questionnaireService;
+    private QuestionService questionService;
 
-    @RequestMapping(value = "/queryQuestionnaireList", method = RequestMethod.POST,headers = "Accept=application/json")
-    public HttpResponseEntity queryQuestionnaireList(@RequestBody QuestionnaireEntity questionnaireEntity, @RequestBody ProjectEntity projectEntity){
+    @RequestMapping(value = "/queryQuestionList", method = RequestMethod.POST,headers = "Accept=application/json")
+    public HttpResponseEntity queryQuestionList(@RequestBody QuestionEntity questionEntity) {
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         try {
-            Map<QuestionnaireEntity, ProjectEntity> hasQuestionnaire = questionnaireService.queryQuestionnaireList(questionnaireEntity,projectEntity);
-            if (CollectionUtils.isEmpty(hasQuestionnaire)){
+            List<QuestionEntity> hasQuestion = questionService.queryQuestionList(questionEntity);
+            if (CollectionUtils.isEmpty(hasQuestion)) {
                 httpResponseEntity.setCode("0");
                 httpResponseEntity.setData(0);
-                httpResponseEntity.setMessage("无问卷信息");
-            }else {
+                httpResponseEntity.setMessage("无问题信息");
+            } else {
                 httpResponseEntity.setCode("666");
-                httpResponseEntity.setData(hasQuestionnaire);
+                httpResponseEntity.setData(hasQuestion);
                 httpResponseEntity.setMessage("查询成功");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
         return httpResponseEntity;
     }
 
-    @RequestMapping(value = "/addQuestionnaireInfo", method = RequestMethod.POST,headers = "Accept=application/json")
-    public HttpResponseEntity addQuestionnaireInfo(@RequestBody QuestionnaireEntity questionnaireEntity){
+    @RequestMapping(value = "/addQuestionInfo", method = RequestMethod.POST,headers = "Accept=application/json")
+    public HttpResponseEntity addQuestionInfo(@RequestBody QuestionEntity questionEntity){
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         try {
-            int result = questionnaireService.insert(questionnaireEntity);
+            int result = questionService.insert(questionEntity);
             if (result != 0){
                 httpResponseEntity.setCode("666");
-                httpResponseEntity.setData(questionnaireEntity.getId());
-                httpResponseEntity.setMessage("新增问卷成功");
+                httpResponseEntity.setData(result);
+                httpResponseEntity.setMessage("新增问题成功");
             }else {
                 httpResponseEntity.setCode("0");
                 httpResponseEntity.setData(0);
-                httpResponseEntity.setMessage("新增问卷失败");
+                httpResponseEntity.setMessage("新增问题失败");
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -61,11 +60,11 @@ public class QuestionnaireController {
         return httpResponseEntity;
     }
 
-    @RequestMapping(value = "/modifyQuestionnaireInfo", method = RequestMethod.POST,headers = "Accept=application/json")
-    public HttpResponseEntity modifyQuestionnaireInfo(@RequestBody QuestionnaireEntity questionnaireEntity){
+    @RequestMapping(value = "/modifyQuestionInfo", method = RequestMethod.POST,headers = "Accept=application/json")
+    public HttpResponseEntity modifyQuestionInfo(@RequestBody QuestionEntity questionEntity){
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         try {
-            int result = questionnaireService.updateByPrimaryKeySelective(questionnaireEntity);
+            int result = questionService.updateByPrimaryKeySelective(questionEntity);
             if (result != 0){
                 httpResponseEntity.setCode("666");
                 httpResponseEntity.setData(result);
@@ -82,11 +81,11 @@ public class QuestionnaireController {
         return httpResponseEntity;
     }
 
-    @RequestMapping(value = "/deleteQuestionnaireById", method = RequestMethod.POST,headers = "Accept=application/json")
-    public HttpResponseEntity deleteQuestionnaireById(@RequestBody QuestionnaireEntity questionnaireEntity){
+    @RequestMapping(value = "/deleteQuestionById", method = RequestMethod.POST,headers = "Accept=application/json")
+    public HttpResponseEntity deleteQuestionById(@RequestBody QuestionEntity questionEntity){
         HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
         try {
-            int result = questionnaireService.deleteQuestionnaireById(questionnaireEntity);
+            int result = questionService.deleteQuestionById(questionEntity);
             if (result != 0){
                 httpResponseEntity.setCode("666");
                 httpResponseEntity.setData(result);

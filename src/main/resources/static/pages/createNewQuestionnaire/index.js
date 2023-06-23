@@ -33,20 +33,20 @@ const handleCreateQuestionnaire = () => {
   }
   if (!params.questionnaireTitle) return alert('问卷名称不能为空！')
   if (!params.questionnaireDescription) return alert('问卷描述不能为空！')
-  console.log(params);
-  $.ajax({
-    url: 'http://127.0.0.1:8089' + '/admin/addQuestionnaireInfo',
-    type: "POST",
-    data: JSON.stringify(params),
-    dataType: "json",
-    contentType: "application/json",
-    success(res) {
-      if (res.code === '666'){
-
-        alert('创建成功！请设置题目')
-        location.href = '/pages/designQuestionnaire/index.html'
-      }
-      else console.log(res)
-    }
-  })
+   $.ajax({
+     url: 'http://127.0.0.1:8085' + '/admin/addQuestionnaireInfo',
+     type: "POST",
+     data: JSON.stringify(params),
+     dataType: "json",
+     contentType: "application/json",
+     success(res) {
+       if (res.code === '666'){
+         alert('创建成功！请设置题目')
+         $util.setPageParam('questionnaireId',res.data)
+         console.log(res.data)
+         location.href = '/pages/designQuestionnaire/index.html'
+       }
+       else console.log(res)
+     }
+   })
 }

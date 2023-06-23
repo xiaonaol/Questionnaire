@@ -5,6 +5,9 @@ public class OptionEntity {
     private String questionId;
     private String optionText;
     private String optionOrder;
+    private String questionnaireId;
+    private String fraction;
+    private String leftTitle;
 
     @Override
     public String toString() {
@@ -13,6 +16,9 @@ public class OptionEntity {
                 ", questionId='" + questionId + '\'' +
                 ", optionText='" + optionText + '\'' +
                 ", optionOrder='" + optionOrder + '\'' +
+                ", questionnaire_id='" + questionnaireId + '\'' +
+                ", fraction='" + fraction + '\'' +
+                ", leftTitle='" + leftTitle + '\'' +
                 '}';
     }
 
@@ -46,6 +52,30 @@ public class OptionEntity {
 
     public void setOptionOrder(String optionOrder) {
         this.optionOrder = optionOrder;
+    }
+
+    public String getQuestionnaireId() {
+        return questionnaireId;
+    }
+
+    public void setQuestionnaireId(String questionnaireId) {
+        this.questionnaireId = questionnaireId;
+    }
+
+    public String getFraction() {
+        return fraction;
+    }
+
+    public void setFraction(String fraction) {
+        this.fraction = fraction;
+    }
+
+    public String getLeftTitle() {
+        return leftTitle;
+    }
+
+    public void setLeftTitle(String leftTitle) {
+        this.leftTitle = leftTitle;
     }
 }
 

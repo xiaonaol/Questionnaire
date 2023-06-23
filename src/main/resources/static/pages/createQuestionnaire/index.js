@@ -9,7 +9,7 @@ const fetchProjectList=()=>{
     createdBy: $util.getItem('userInfo')[0].username
   }
   $.ajax({
-    url: API_BASE_URL + '/queryProjectList',
+    url: API_BASE_URL + '/admin/queryProjectList',
     type: "POST",
     data:JSON.stringify(params),
     dataType: "json",
@@ -19,7 +19,7 @@ const fetchProjectList=()=>{
         $('#selectProject').append(`<option value= ${item.id}> ${item.projectName} </option>`)
       })
     }
-  })
+})
 }
 
 const onCreateTemplate = () => {
@@ -89,4 +89,3 @@ const createTemplate = () => {
 const handleEdit = () => {
   open('/pages/designQuestionnaire/index.html')
 }
-

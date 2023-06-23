@@ -29,7 +29,7 @@ const onAddQuestion = (type) => {
       break;
   }
   $('#problem').append(ele)
-  problem.push({ problemName: '', mustAnswer: true, option: [{}] })
+  problem.push({ problemName: '', mustAnswer: true, option: [{}] ,problemId: '', problemType: ''})
 
   $(".question").hover(() => {
     let problemIndex = $('.question:hover').attr('data-problemIndex')
@@ -214,6 +214,8 @@ const singleChoiceEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom2`).css('display', 'inline')
   $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
   $(`#question${problemIndex} .bottom2`).html('')
+  problem[problemIndex].problemId = problemIndex
+  problem[problemIndex].problemType = 1
   problem[problemIndex].option.map(item => {
     $(`#question${problemIndex} .bottom2`).append(`
       <div style="display: flex; align-items: center;">
@@ -279,6 +281,8 @@ const multipleChoiceEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom2`).css('display', 'inline')
   $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
   $(`#question${problemIndex} .bottom2`).html('')
+  problem[problemIndex].problemId = problemIndex
+  problem[problemIndex].problemType = 2
   problem[problemIndex].option.map(item => {
     $(`#question${problemIndex} .bottom2`).append(`
       <div style="display: flex; align-items: center;">
@@ -316,6 +320,8 @@ const fillBlanksEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom`).css('display', 'none')
   $(`#question${problemIndex} .bottom2`).css('display', 'inline')
   $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
+  problem[problemIndex].problemId = problemIndex
+  problem[problemIndex].problemType = 3
   $(`#question${problemIndex} .bottom2`).html(`
     <div style="border: 1px solid #CCCCCC; width: 50%; height: 70px;"></div>
   `)
@@ -375,6 +381,8 @@ const matrixEditFinish = (problemIndex) => {
   $(`#question${problemIndex} .bottom2`).css('display', 'inline')
   $(`#question${problemIndex} #questionTitle`).text(`${problemIndex + 1}.${problem[problemIndex].problemName}`)
   $(`#question${problemIndex} .bottom2`).html('')
+  problem[problemIndex].problemId = problemIndex
+  problem[problemIndex].problemType = 4
   let trs = problem[problemIndex].leftTitle ? problem[problemIndex].leftTitle.split(',') : []
   $(`#question${problemIndex} .bottom2`).append(`
     <table class="table">
@@ -481,6 +489,8 @@ const gaugeEditFinish = (problemIndex) => {
       </div>
     `)
   })
+  problem[problemIndex].problemId = problemIndex
+  problem[problemIndex].problemType = 5
   $(`#question${problemIndex} .bottom2`).append(`
     <div>${problem[problemIndex].option[problem[problemIndex].option.length - 1].chooseTerm}</div>
   `)
@@ -494,15 +504,44 @@ const handleModifyTitle = () => {
 
 
 const handleEditFinish = () => {
-  let params = {}
-  $.ajax({
-    url: API_BASE_URL + '/modifyQuestionnaire',
-    type: "POST",
-    data: JSON.stringify(params),
-    dataType: "json",
-    contentType: "application/jsoresn",
-    success(res) {
-      console.log(res)
+
+  problem.forEach(function (question,index){
+    let params_question = {
+      questionNum:index,
+      questionnaireId:$util.getPageParam('questionnaireId'),
+      questionTitle:question.problemName,
+      questionType:question.problemType,
+      mustAnswer:question.mustAnswer
     }
+    console.log(params_question.questionnaireId);
+     $.ajax({
+       url: 'http://127.0.0.1:8085' + '/admin/addQuestionInfo',
+       type: "POST",
+       data: JSON.stringify(params_question),
+       dataType: "json",
+       contentType: "application/json",
+       success(res) {
+       }
+     })
+
+    question.option.forEach(function(temp,index){
+      let params_option = {
+        optionOrder:index,
+        questionId:question.problemId,
+        optionText:temp.chooseTerm,
+        fraction:temp.fraction,
+        questionnaireId:$util.getPageParam('questionnaireId')
+      }
+      $.ajax({
+        url: 'http://127.0.0.1:8085' + '/admin/addOptionInfo',
+        type: "POST",
+        data: JSON.stringify(params_option),
+        dataType: "json",
+        contentType: "application/json",
+        success(res) {
+        }
+      })
+    })
   })
+  alert("创建成功")
 }

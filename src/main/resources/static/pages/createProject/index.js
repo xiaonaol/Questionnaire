@@ -7,8 +7,9 @@ const handleCreateProject = () => {
   let params = {
     createdBy: $util.getItem('userInfo')[0].username,
     lastUpdatedBy: $util.getItem('userInfo')[0].username,
-    projectName: $('#projectName').val(),
-    projectContent: $('#projectDescribe').val()
+    projectName: $('#projectName').val().trim(),
+    projectContent: $('#projectDescribe').val(),
+    createTime: $('#createTime').val()
   }
   if (!params.projectName) return alert('项目名称不能为空！')
   if (!params.projectContent) return alert('项目描述不能为空！')
